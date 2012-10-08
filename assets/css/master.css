@@ -1,0 +1,233 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,  figure, figcaption, footer, header, hgroup,  menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 75%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Styles */
+body {
+    font-family: Trebuchet, Georgia, Arial, sans-serif;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+div.slider div {
+    background-image: url("../images/blackboard-backgrounds-wallpapers.jpg");
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    color: #ffffff;
+    overflow: hidden;
+    float: left;
+}
+
+div.window {
+    overflow: hidden;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.slider {
+    position: absolute;
+    width: auto;
+    display: inline;
+    white-space: nowrap;
+}
+
+h1 {
+    text-align: center;
+    font-size: 4.5em;
+}
+
+h2 {
+    padding-top: 0.2em;
+    text-align: center;
+    font-size: 2.5em;
+}
+
+h5 {
+    text-align: right;
+    padding-right: .5em;
+    font-size: 2em;
+}
+
+canvas#paradigms {
+    margin: 0px auto;
+    display: block;
+}
+
+div.title h1:first-of-type {
+    padding-top: 1em;
+}
+div.quote h2:first-of-type {
+    padding-top: 3em;
+}
+div.title h5:first-of-type, div.quote h5:first-of-type {
+    padding-top: 3em;
+}
+
+div.title.quote h1 {
+    font-size: 3.2em;
+}
+
+div.title h5 {
+    padding-right: 1em;
+}
+div dd {
+    float: left;
+}
+div dt {
+    clear: left;
+    float:left;
+    padding-top: 0.25em;
+    padding-left: 1em;
+
+}
+div.stupid dd {
+    font-size: 2.3em;
+    margin-top: 0.9em
+}
+div.stupid dt {
+    padding-top: 0.25em;
+    padding-left: 1em;
+    font-size: 3.6em;
+}
+div.solid dd {
+    font-size: 2em;
+    margin-top: 1.3em;
+    padding-left: 0.1em;
+}
+div.solid dt {
+    font-size: 4em;
+}
+div.slow dd {
+    font-size: 2.7em;
+    margin-top: 1.2em;
+    padding-left: 0.1em;
+}
+div.slow dt {
+    font-size: 4.5em;
+    padding-top: 0.4em;
+}
+div.slider dd.show {
+    display: none;
+}
+div.slider div ul li {
+    display:none;
+    padding-top: .1em;
+    white-space: normal;
+}
+div.slider div ol {
+    padding-top: .25em;
+    list-style: decimal;
+    padding-left: 2em;
+    font-size: 2em;
+}
+div.slider div ul {
+    padding-top: .25em;
+    list-style: circle;
+    padding-left: 2em;
+    font-size: 2em;
+}
+div.slider div ul ul, div.slider div ul ol {
+    padding-top: .25em;
+    padding-left: 1em;
+    font-size: .75em;
+}
+div.slider code {
+    background: rgba(255, 255, 255, 0.7);
+    margin: .2em .9em .2em .2em;
+    display: block;
+    padding: 0.5em;
+}
+div img.full {
+    width: 98%;
+    height: 98%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1%;
+}
+
+div.leak code {
+    font-size: 0.8em;
+}
+
+div.slider div.comments ol {
+    list-style: none;
+}
+div.slider div.comments li {
+    display:none;
+    padding-top: .6em;
+    padding-left: .1em;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 2.2em;
+}
+
+div.slider div.credits h2 {
+    font-size: 4em;
+    padding-top: 0.5em;
+}
+
+div.slider div.codeblock code {
+    font-size: 1.8em;
+}
+div.slider div.paradigm-summary h1 {
+    padding-top: 1.5em;
+    font-size: 3em;
+}
+
+div.slider div.paradigm-summary h5 {
+    padding-top: 2em;
+}
+
+div.pagination {
+	position: absolute;
+	bottom: 1px;
+	right: 1px;
+}
+div.pagination select {
+	font-size: 0.4em;
+	padding: 3px;
+	-webkit-appearance: menulist-button;
+}
+div.printerInterface1 code {
+    font-size: 2em;
+}
+div.printerInterface2 h2 {
+    font-size: 1.8em;
+}
+div.printerInterface2 code {
+    font-size: 1.5em;
+}
+div h2 code.prettyprint {
+    display: inline;
+    margin: 0.1em;
+    padding: 0.2em;
+}

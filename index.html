@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Password Hashing in PHP</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="assets/js/jquery.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.mobile.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.tools.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.hashchange.js"></script>
+        <script type="text/javascript" src="assets/js/markdown.js"></script>
+        <script type="text/javascript" src="assets/js/prettify.js"></script>
+
+
+
+        <script type="text/javascript" src="assets/js/slides.js"></script>
+        <link href="assets/css/master.css" rel="stylesheet" type="text/css"></link>
+        <link href="assets/css/prettify.css" rel="stylesheet" type="text/css"></link>
+
+    </head>
+    <body>
+        <div class="window">
+            <div class="slider">
+                <div class="markdown title" title="Home">
+                    Cryptography
+                    ============
+                    In PHP
+                    ======
+                    ## For The Average Dev 
+                </div>
+                <div class="markdown List" title="Cryptography">
+                    ## Cryptography
+                    * Keeping Data Secure
+                        * Safe From Viewing
+                        * Safe From Tampering
+                        * Safe From Forgery
+                    * Not A Silver Bullet
+                        * XSS
+                        * SQLI
+                        * Social Engineering
+                    * Very Hard To Do
+                        * Any bug will cause problems
+                </div>
+                <div class="markdown title" title="First Rule">
+                    The First Rule
+                    ==============
+                    of Cryptography
+                    ===============
+                </div>
+                <div class="markdown title" title="Dont Do It">
+                    Don't Do It!
+                    ============
+                </div>
+                <div class="markdown title" title="Experts Only">
+                    Leave It For
+                    ============
+                    Experts!
+                    ========
+                </div>
+                <div class="markdown List" title="Random">
+                    ## Random!
+                    * The foundation of Cryptography
+                    * Classified As Three Types:
+                        * Weak
+                            * For non-cryptographic usages
+                        * Strong
+                            * For cryptographic usage where security
+                                does not depend on the strength of randomness
+                        * Cryptographically Secure
+                            * For cryptographic usage when security does depend
+                                the strength of randomness
+                </div>
+                <div class="markdown List" title="Random Vulnerabilities">
+                    ## Vulnerabilities of Randomness
+                    * Bias
+                        * Certain values tend to occur more often making it easier to predict
+                    * Predictability
+                        * Knowing past numbers helps predict future ones
+                    * Poisoning
+                        * Ability to alter future random number generation
+                </div>
+                <div class="markdown List" title="Weak Randomness">
+                    ## Weak Random in PHP
+                    * `rand()`
+                    * `mt_rand()`
+                    * `uniqid()`
+                    * `lcg()`
+                </div>
+                <div class="markdown List" title="Strong Randomness">
+                    ## Strong Random in PHP
+                    * `mcrypt_create_iv()`
+                    * `openssl_pseudo_bytes()`
+                    * `/dev/urandom`
+                        * For *nix systems only
+                </div>
+                <div class="markdown List" title="CS Randomness">
+                    ## Cryptographically Secure
+                    * `mcrypt_create_iv()`
+                    * Maybe: `openssl_pseudo_bytes()`
+                    * `/dev/random`
+                        * For *nix systems only
+                </div>
+                <div class="markdown title" title="Warning #1">
+                    NEVER Use Weak
+                    ==============
+                    For Security
+                    ============
+                </div>
+                <div class="markdown title" title="Encryption">
+                    Encryption
+                    ==========
+                </div>
+                <div class="markdown title" title="Seriously">
+                    Seriously,
+                    ==========
+                    Don't Do It!
+                    ============
+                </div>
+                <div class="markdown List" title="Types of Encryption">
+                    ## Types of Encryption
+                    * Two Kinds Of Ciphers
+                        * Block Ciphers
+                            * Operates on fixed-size "blocks"
+                        * Stream Ciphers
+                            * Operates on variable sized streams
+                    * Two Types of Ciphers
+                        * Symetric
+                            * Shared Key
+                        * Asymetric
+                            * Public/Private Key
+                </div>
+                <div class="markdown List" title="Symetric Block Ciphers">
+                    ## Symetric Block Ciphers
+                    * Most Common Cipher Type
+                    * Uses "Modes"
+                        * So a block cipher can operate on longer input
+                </div>
+                <div class="markdown List comments" title="Comments">
+                    1. Questions?
+                    2. Comments?
+                    3. Snide Remarks?
+                </div>
+                <div class="markdown credits" title="Credits">
+                    ## Anthony Ferrara
+                    ## @ircmaxell
+                    ## blog.ircmaxell.com
+                    ## me@ircmaxell.com
+                </div>
+            </div>
+        </div>
+        <div class="pagination">
+            <form>
+                <select>
+                </select>
+            </form>
+        </div>
+    </body>
+</html>
