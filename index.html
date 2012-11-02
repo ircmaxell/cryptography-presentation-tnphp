@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Password Hashing in PHP</title>
+        <title>Cryptography For The Average Dev</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="assets/js/jquery.js"></script>
         <script type="text/javascript" src="assets/js/jquery.mobile.js"></script>
@@ -83,19 +83,19 @@
                     * `rand()`
                     * `mt_rand()`
                     * `uniqid()`
-                    * `lcg()`
+                    * `lcg_value()`
                 </div>
                 <div class="markdown List" title="Strong Randomness">
                     ## Strong Random in PHP
                     * `mcrypt_create_iv()`
-                    * `openssl_pseudo_bytes()`
+                    * `openssl_random_pseudo_bytes()`
                     * `/dev/urandom`
                         * For *nix systems only
                 </div>
                 <div class="markdown List" title="CS Randomness">
                     ## Cryptographically Secure
                     * `mcrypt_create_iv()`
-                    * Maybe: `openssl_pseudo_bytes()`
+                    * Maybe: `openssl_random_pseudo_bytes()`
                     * `/dev/random`
                         * For *nix systems only
                 </div>
@@ -104,6 +104,31 @@
                     ==============
                     For Security
                     ============
+                </div>
+                <div class="markdown title" title="Warning #2">
+                    NEVER Use CS
+                    ============
+                    When Not Needed!
+                    ================
+                </div>
+                <div class="markdown title" title="Tip #1">
+                    If In Doubt
+                    ===========
+                    Use Strong
+                    ==========
+                    Randomness
+                    ==========
+                </div>
+                <div class="markdown List" title="Encryption vs Hashing">
+                    ## Encryption vs Hashing
+                    * Encryption
+                        * Encoding
+                        * 2 Way / Reversible
+                        * Putting a lock on a box
+                    * Hashing
+                        * Signing
+                        * 1 Way / Non-Reversible
+                        * Taking a person's finger-print
                 </div>
                 <div class="markdown title" title="Encryption">
                     Encryption
@@ -115,24 +140,352 @@
                     Don't Do It!
                     ============
                 </div>
-                <div class="markdown List" title="Types of Encryption">
-                    ## Types of Encryption
-                    * Two Kinds Of Ciphers
-                        * Block Ciphers
-                            * Operates on fixed-size "blocks"
-                        * Stream Ciphers
-                            * Operates on variable sized streams
-                    * Two Types of Ciphers
-                        * Symetric
-                            * Shared Key
-                        * Asymetric
-                            * Public/Private Key
+                <div class="markdown List" title="Two Kinds">
+                    ## Two Kinds
+                    * Symmetric Encryption
+                        * Like a Pad-Lock with shared key
+                        * The only secret is the key
+                        * Both sides must have same key
+                    * Asymmetric Encryption
+                        * Like a pair of Pad-Locks
+                            * The "lock" is the public-key
+                        * The only secret is the private key
+                        * Both sides have their own key
+                </div>
+                <div class="markdown List" title="A Tale Of Numbers">
+                    ## Symmetric Encryption 101
+                    * Number: `01`
+                    * Scratch That
+                    * Numbers: `01 04 01 54 95 42 64 12`
+                </div>
+                <div class="markdown List" title="Numbers Part 2">
+                    ## Symmetric Ecryption 101
+                    ##Let's Add A "Secret" Number!
+
+                    * `01 04 01 54 95 42 64 12`
+                    * `+ 10`
+                    * `11 14 11 64 05 52 74 22`
+                </div>
+                <div class="markdown List" title="Caesar Cipher">
+                    ## Symmetric Encryption 101
+                    * We just invented the Caesar Cipher
+                    * Commonly known as ROT13
+                    * But There Are Problems:
+                        * Vulnerable To Statistical Attacks
+                        * Vulnerable To Brute Forcing
+                            * Only 100 possible secret numbers!
+                </div>
+                <div class="markdown List" title="Pads">
+                    ## I Know!
+                    ## Let's add a *different* number
+                    * `01 04 01 54 95 42 64 12`
+                    * `10 43 21 95 42 67 31 83`
+                    * `11 47 22 49 37 09 95 95`
+                </div>
+                <div class="markdown List" title="Pads, Ctd">
+                    ## How It Works
+                    * We can generate the pads in two ways
+                    * Randomly
+                        * If we only use once, perfect security
+                            * Known as a one-time-pad
+                        * If we use multiple times, same as a caesar cipher
+                    * With a function
+                        * Given one or two inputs
+                            * A key, and an "offset"
+                        * Generates a "stream" of pseudo random numbers
                 </div>
                 <div class="markdown List" title="Symetric Block Ciphers">
-                    ## Symetric Block Ciphers
-                    * Most Common Cipher Type
-                    * Uses "Modes"
-                        * So a block cipher can operate on longer input
+                    ## Ciphers
+                    * Take 2 inputs
+                        * A secret key
+                        * An "input"
+                    * Produces Pseudo-Random Output
+                        * Looks random (statstically)
+                        * Is reproducable
+                </div>
+                <div class="markdown List" title="Block Cipher Modes">
+                    ## Modes
+                    * Multiple ways to use the key stream
+                    * Each way is known as a "Mode"
+                    * Some are secure
+                        * Others are not
+                </div>
+                <div class="markdown List" title="ECB">
+                    ## ECB
+                    * Electronic Code Book
+                    * Uses plain text as "input"
+                    * Uses output as ciphertext
+                    * VERY BROKEN!!!
+                </div>
+                <div title="ECB Image">
+                    <img src="assets/images/ecb_encryption.png" class="full" />
+                </div>
+                <div class="markdown List" title="CBC">
+                    ## CBC
+                    * Cipher Block Chaining
+                    * Uses an "Initialization Vector"
+                        * Helps "randomize" the plaintext
+                        * Ensures no non-unique blocks
+                        * Does **NOT** need to be secret!
+                    * Chains each block together
+                        * Propagating the generated "randomness"
+                    * Plain Text Must Be Padded
+                        * To a multiple of block-size
+                    * Secure!
+                </div>
+                <div title="CBC Image">
+                    <img src="assets/images/cbc_encryption.png" class="full" />
+                </div>
+                <div class="markdown List" title="CFB">
+                    ## CFB
+                    * Cipher FeedBack
+                    * Uses an "Initialization Vector"
+                    * Plain Text never enters cipher
+                        * Does not need to be padded
+                    * "Decrypt" Is Never Used
+                    * Secure!
+                </div>
+                <div title="CFB Image">
+                    <img src="assets/images/cfb_encryption.png" class="full" />
+                </div>
+                <div class="markdown List" title="Ciphers">
+                    ## Ciphers
+                    * AES 128 &amp; 256
+                        * Standard
+                        * Also known as RIJNDAEL-128
+                        * Very Strong
+                    * Blowfish
+                    * TwoFish
+                    * Serpent
+                </div>
+                <div class="markdown List" title="Authentication">
+                    ## Authentication
+                    * How do you know it wasn't tampered with?
+                    * HMAC
+                        * Hash-based Message Authentication Code
+                    * USE A SEPARATE KEY!
+                    * Encrypt-Then-MAC
+                        * Always MAC after encryption
+                </div>
+                <div class="markdown title" title="Encryption - Together">
+                    All Together Now!
+                    =================
+                </div>
+                <div class="markdown" title="Encryption - code">
+                    ## Encrypt
+                        $key = 'xxxxxxxxxxxx';
+                        $authKey = 'XXXXXXXXXXXX';
+                        $plain = 'This is plain text that I am going to encrypt';
+
+                        $size = mcrypt_get_iv_size(
+                            MCRYPT_RIJNDAEL_128,
+                            MCRYPT_MODE_CFB
+                        );
+                        $iv = mcrypt_create_iv(
+                            $size,
+                            MCRYPT_DEV_URANDOM
+                        );
+
+                        $ciphertext = mcrypt_encrypt(
+                            MCRYPT_RIJNDAEL_128,
+                            $key,
+                            $plain,
+                            MCRYPT_MODE_CFB,
+                            $iv
+                        );
+                        $auth = hash_hmac('sha512', $ciphertext, $authKey);
+
+                        $encrypted = base64_encode($iv . $ciphertext . $auth);
+                </div>
+                <div class="markdown" title="Decryption - code">
+                    ## Decrypt
+                        $key = 'xxxxxxxxxxxxxx';
+                        $authKey = 'XXXXXXXXXXXXXX';
+                        $size = mcrypt_get_iv_size(
+                            MCRYPT_RIJNDAEL_128,
+                            MCRYPT_MODE_CFB
+                        );
+                        $encrypted = base64_decode($encrypted);
+                        $iv = substr($encrypted, 0, $size);
+                        $auth = substr($encrypted, -64);
+                        $ciphertext = substr($encrypted, $size, -64);
+
+                        if ($auth != hash_hmac('sha512', $ciphertext, $authKey)) {
+                            // Auth Failed!!!
+                            return false;
+                        }
+
+                        $plain = mcrypt_decrypt(
+                            MCRYPT_RIJNDAEL_128,
+                            $key,
+                            $ciphertext,
+                            MCRYPT_MODE_CFB,
+                            $iv
+                        );
+                </div>
+                <div class="markdown List" title="Don't, please don't">
+                    Please Don't Do It!
+                    ===================
+                    * Notice how much code it took
+                    * Notice how complex it is
+                    * Notice how easy to screw up
+                    * Notice how many decisions there are to make!
+                </div>
+                <div class="markdown title" title="Use a lib">
+                    If you MUST,
+                    ============
+                    Use A Library
+                    =============
+                </div>
+                <div class="markdown List" title="Common Needs">
+                    ## Common Encryption Needs
+                    * Between Client/Server
+                        * Use SSL
+                        * Really, just use SSL
+                        * I'm not kidding, just use SSL
+                    * Storage
+                        * Use disk encryption
+                        * Use database encryption
+                </div>
+                <div class="markdown title" title="Really!">
+                    Really
+                    ======
+                    Don't Do It!
+                    ============
+                </div>
+                <div class="markdown List" title="Encryption Resources">
+                    ## Encryption Resources
+                    * Zend Framework Encryption
+                        * Very good and complete library
+                        * Zend Framework 2
+                            * `Zend\Crypt\BlockCipher`
+                    * PHP Sec Lib
+                        * phpseclib.sourceforge.net
+                        * PHP 4+ Compatible
+                        * Implements Lots of Algorithms
+                        * Pure PHP
+                    * Not Many Others
+                        * I'm working on CryptLib, but NOT usable
+                        * Beware of tutorials online!
+                </div>
+                <div class="markdown title" title="Password Storage">
+                    Password
+                    ========
+                    Storage
+                    =======
+                </div>
+                <div class="markdown title" title="HASHING!!!!">
+                    Passwords
+                    =========
+                    Should Be
+                    =========
+                    HASHED!
+                    =======
+                    Not Encrypted!
+                    ==============
+                </div>
+                <div class="markdown List" title="Password #1">
+                    ## Password Hashes
+                    * Use a salt
+                        * Defeats Rainbow tables
+                        * Makes each hash a "proof of work"
+                        * Should be random!
+                            * Strong Randomness
+                    * Should be SLOW
+                        * Salt is not enough
+                        * Salted SHA256: 11 BILLION per second
+                        * bcrypt: 3200 per second
+                </div>
+                <div class="markdown List" title="Do This!">
+                    ## Good Algorithms
+                    * Slow Algorithms:
+                            
+                            crypt($password, $salt);
+                            pbkdf2($password, $salt, $i);
+                            password_hash(
+                                $password, 
+                                PASSWORD_BCRYPT
+                            );
+                            $passLib-&gt;hash($password);
+                            $phpass-&gt;hashPassword($pass);
+                </div>
+                <div class="markdown List" title="Cost Parameter">
+                    ## Cost Parameter
+                    * Target: 0.25 Seconds
+                        * As slow as you can afford
+                    * Depends on hardware
+                        * Test it!
+                    * Good Defaults:
+                        * BCrypt: 10
+                        * PBKDF2: 10000
+                </div>
+                <div class="markdown title" title="Password Hashing">
+                    Simplified
+                    ==========
+                    Password Hashing
+                    ================
+                </div>
+                <div class="markdown List api" title="New API">
+                    ## New API for 5.5
+                    * string **password_hash**($pass, $algo, array $options = array())
+                        * Generates salt, hashes password using algo
+                    * bool **password_verify**($pass, $hash)
+                        * Verifies hash and password, returns boolean
+                    * bool **password_needs_rehash**($hash, $algo, $options = array())
+                        * Determines if the hash is the same as specified by algo
+                    * array **password_get_info**($hash)
+                        * Returns an array of information about the hash
+                </div>
+                <div class="markdown code" title="Example">
+                    ## Example
+
+                        function register($user, $password) {
+                            $hash = password_hash($password, PASSWORD_BCRYPT);
+                            $this-&gt;store($user, $hash);
+                        }
+
+                        function login($user, $password) {
+                            $hash = $this-&gt;fetchHash($user);
+
+                            if (password_verify($password, $hash)) {
+
+                                if (password_needs_rehash($hash, PASSWORD_BCRYPT)) {
+
+                                    $hash = password_hash($password, PASSWORD_BCRYPT);
+                                    $this-&gt;store($user, $hash);
+                                }
+
+                                $this-&gt;startSession();
+                                return true;
+                            }
+                            return false;
+                        }
+                </div>
+                <div class="markdown List" title="Hashing Resources">
+                    ## Hashing Resources
+                    * PHP 5.5 API
+                        * wiki.php.net/rfc/password_hash
+                    * Password Compat
+                        * PHP 5.5 Compatibility
+                        * github/ircmaxell/password_compat
+                    * PasswordLib
+                        * 5.3+, Multiple Algorithms, Portable
+                        * github/ircmaxell/PHP-PasswordLib
+                    * PHPASS
+                        * PHP 4+
+                        * openwall.com/phpass
+                </div>
+                <div class="markdown title" title="Expert">
+                    Seriously
+                    =========
+                    Hire an Expert!!!
+                    =================
+                </div>
+                <div class="markdown title" title="Warning #3">
+                    You Have Been
+                    =============
+                    Warned
+                    ======
                 </div>
                 <div class="markdown List comments" title="Comments">
                     1. Questions?
